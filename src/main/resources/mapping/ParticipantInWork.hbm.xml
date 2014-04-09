@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.work.ParticipantInWork" table="alkotas_has_szemely" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="order" column="szemely_sorrend" access="field"/>
+        <many-to-one name="work" class="hu.noherczeg.necora.domain.work.Work" access="field">
+            <column name="alkotas_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="participant" class="hu.noherczeg.necora.domain.user.User" access="field">
+            <column name="szemely_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

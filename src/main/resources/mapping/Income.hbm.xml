@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.income.Income" table="bevetel" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="amount" column="osszeg" access="field"/>
+        <property name="date" column="datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="description" column="leiras" access="field"/>
+        <many-to-one name="type" class="hu.noherczeg.necora.domain.income.IncomeType" access="field">
+            <column name="tipus_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="institute" class="hu.noherczeg.necora.domain.institute.Institute" access="field">
+            <column name="intezet_id"/>
+        </many-to-one>
+        <many-to-one name="tender" class="hu.noherczeg.necora.domain.tender.Tender" access="field">
+            <column name="palyazat_id"/>
+        </many-to-one>
+        <many-to-one name="department" class="hu.noherczeg.necora.domain.department.Department" access="field">
+            <column name="tanszek_id"/>
+        </many-to-one>
+        <set name="investments" inverse="true" access="field">
+            <key>
+                <column name="bevetel_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.investment.Investment"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.institution.Institution" table="intezmeny" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="name" column="nev" access="field"/>
+        <property name="address" column="cim" access="field"/>
+        <property name="description" column="leiras" access="field"/>
+        <many-to-one name="country" class="hu.noherczeg.necora.domain.country.Country" access="field">
+            <column name="orszag_id" not-null="true"/>
+        </many-to-one>
+        <set name="employees" inverse="true" access="field">
+            <key>
+                <column name="intezmeny_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.institution.EmployeeOfInstitution"/>
+        </set>
+        <set name="tenders" inverse="true" access="field">
+            <key>
+                <column name="intezmeny_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.institution.TenderOfInstitution"/>
+        </set>
+    </class>
+</hibernate-mapping>

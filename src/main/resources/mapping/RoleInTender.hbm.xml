@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="hu.noherczeg.necora.domain.tender.RoleInTender" table="palyazat_szerepkor" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="name" column="nev" access="field"/>
+        <set name="applicants" inverse="true" table="palyazok" access="field">
+            <key>
+                <column name="szerepkor_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.tender.Applicant"/>
+        </set>
+    </class>
+</hibernate-mapping>

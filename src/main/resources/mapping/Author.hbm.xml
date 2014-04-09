@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.publication.Author" table="publikacio_szerzok" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="position" column="sorrend" access="field"/>
+        <many-to-one name="publication" class="hu.noherczeg.necora.domain.publication.Publication" access="field">
+            <column name="publikacio_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="author" class="hu.noherczeg.necora.domain.user.User" access="field">
+            <column name="szemely_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="hu.noherczeg.necora.domain.work.Work" table="alkotas" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="name" column="nev" access="field"/>
+        <property name="date" column="datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="description" column="leiras" access="field"/>
+        <property name="mtmtId" column="mtmt_id" access="field"/>
+        <property name="comment" column="megjegyzes" access="field"/>
+        <many-to-one name="type" class="hu.noherczeg.necora.domain.work.TypeOfWork" access="field">
+            <column name="tipus_id" not-null="true"/>
+        </many-to-one>
+        <set name="participants" inverse="true" table="alkotas_has_szemely" access="field">
+            <key>
+                <column name="alkotas_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.work.ParticipantInWork"/>
+        </set>
+        <set name="tenders" inverse="true" lazy="true" fetch="select" table="palyazat_has_alkotas" access="field">
+            <key>
+                <column name="alkotas_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="hu.noherczeg.necora.domain.tender.Tender">
+                <column name="palyazat_id" not-null="true"/>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

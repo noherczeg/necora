@@ -1,0 +1,1206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="noherczeg (generated)" id="1394402495581-1">
+        <createTable tableName="acl_class">
+            <column autoIncrement="true" name="id" type="BIGINT(19)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="class" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-2">
+        <createTable tableName="acl_entry">
+            <column autoIncrement="true" name="id" type="BIGINT(19)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="acl_object_identity" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ace_order" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sid" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mask" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="granting" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="audit_success" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="audit_failure" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-3">
+        <createTable tableName="acl_object_identity">
+            <column autoIncrement="true" name="id" type="BIGINT(19)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="object_id_class" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="object_id_identity" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_object" type="BIGINT(19)"/>
+            <column name="owner_sid" type="BIGINT(19)"/>
+            <column name="entries_inheriting" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-4">
+        <createTable tableName="acl_sid">
+            <column autoIncrement="true" name="id" type="BIGINT(19)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="principal" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sid" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-5">
+        <createTable tableName="alkotas">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tipus_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="leiras" type="VARCHAR(512)"/>
+            <column name="mtmt_id" type="VARCHAR(64)"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-6">
+        <createTable tableName="alkotas_has_szemely">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="alkotas_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szemely_sorrend" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-7">
+        <createTable tableName="alkotas_tipus">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-8">
+        <createTable tableName="beruhazas">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="bevetel_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="tipus_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="osszeg" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="leiras" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-9">
+        <createTable tableName="beruhazas_tipus">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" remarks="epites vagy gep, muszer vagy szoftver vagy licensz, know-how" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-10">
+        <createTable tableName="bevetel">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="osszeg" remarks="bevetel lehet negativ?" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datum" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipus_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="leiras" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="palyazat_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="tanszek_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="intezet_id" type="BIGINT(19) UNSIGNED"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-11">
+        <createTable tableName="bevetel_tipus">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-12">
+        <createTable tableName="dij">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orszag_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="megnevezes" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="adomanyozo" type="VARCHAR(256)"/>
+            <column name="leiras" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-13">
+        <createTable tableName="esemeny">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tipus_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kezdo_datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_datum" type="date"/>
+            <column name="helyszin" type="VARCHAR(256)"/>
+            <column name="leiras" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-14">
+        <createTable tableName="esemeny_resztvevok">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="esemeny_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szerepkor_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-15">
+        <createTable tableName="esemeny_szerepkor">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-16">
+        <createTable tableName="esemeny_tipus">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-17">
+        <createTable tableName="fokozat">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-18">
+        <createTable tableName="hazai_nemzetkozi">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" remarks="hazai, nemzetközi" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-19">
+        <createTable tableName="intezet">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-20">
+        <createTable tableName="intezet_tanszekei">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="intezet_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tanszek_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kezdo_datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_datum" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-21">
+        <createTable tableName="intezmeny">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cim" type="VARCHAR(256)"/>
+            <column name="leiras" type="VARCHAR(512)"/>
+            <column name="orszag_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-22">
+        <createTable tableName="intezmeny_dolgozoi">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="intezmeny_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kezdo_datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_datum" type="date"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-23">
+        <createTable tableName="intezmeny_palyazatai">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="palyazat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="intezmeny_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="felelos" type="BIT"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-24">
+        <createTable tableName="kepzesszint">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-25">
+        <createTable tableName="log">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="php_sapi_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="level" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="context" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="created_at" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-26">
+        <createTable tableName="nyelv">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kod" remarks="pl en, hu, stb.." type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-27">
+        <createTable tableName="nyelvtudas">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nyelv_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nyelvtudas_fok_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bizonyitvany" type="VARCHAR(256)"/>
+            <column name="datum" remarks="Megszerzes eve" type="date"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-28">
+        <createTable tableName="nyelvtudas_fok">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-29">
+        <createTable tableName="orszag">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kod" remarks="pl. hu, gb, stb.." type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-30">
+        <createTable tableName="palyazat">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cime" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orszag_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="tipus_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="statusz_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="konstrukcio" remarks="TAMOP-4.1.2.A, GOP, stb" type="VARCHAR(256)"/>
+            <column name="vezeto" type="BIT"/>
+            <column name="osszeg_igenyelt" type="DOUBLE"/>
+            <column name="osszeg_onero" remarks="Az igenyelt osszegen feluli osszeg" type="DOUBLE"/>
+            <column name="beadasi_datum" type="date"/>
+            <column name="kezdo_datum" type="date"/>
+            <column name="vege_datum" type="date"/>
+            <column name="leiras" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-31">
+        <createTable tableName="palyazat_has_alkotas">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="palyazat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="alkotas_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-32">
+        <createTable tableName="palyazat_has_esemeny">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="palyazat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="esemeny_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-33">
+        <createTable tableName="palyazat_has_publikacio">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="palyazat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="publikacio_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-34">
+        <createTable tableName="palyazat_has_tudomanyterulet">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="palyazat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tudomanyterulet_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-35">
+        <createTable tableName="palyazat_statusz">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-36">
+        <createTable tableName="palyazat_szerepkor">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-37">
+        <createTable tableName="palyazat_tipus">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-38">
+        <createTable tableName="palyazok">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="palyazat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szerepkor_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-39">
+        <createTable tableName="publikacio">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tipus_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nyelv_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="cim" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datum" remarks="Csak az ev fontos" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lektoralt" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="megjelenes_hely" type="VARCHAR(256)"/>
+            <column name="megjelenes_kiado" type="VARCHAR(256)"/>
+            <column name="oldalszam" type="BIGINT(19) UNSIGNED"/>
+            <column name="kotet" type="VARCHAR(256)"/>
+            <column defaultValueNumeric="0.0" name="impaktfaktor" type="DOUBLE"/>
+            <column defaultValueNumeric="0" name="hivatkozas_fuggetlen" type="BIGINT(19) UNSIGNED"/>
+            <column defaultValueNumeric="0" name="hivatkozas_fuggo" type="BIGINT(19) UNSIGNED"/>
+            <column name="mtmt_id" type="VARCHAR(64)"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-40">
+        <createTable tableName="publikacio_szerzok">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="publikacio_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sorrend" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-41">
+        <createTable tableName="publikacio_tipus">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-42">
+        <createTable tableName="szak">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kepzesszint_id" type="BIGINT(19) UNSIGNED"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-43">
+        <createTable tableName="szemely">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="titulus" type="VARCHAR(50)"/>
+            <column name="csaladnev" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="keresztnev" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="eha_kod" type="VARCHAR(32)"/>
+            <column name="om_id" type="VARCHAR(32)"/>
+            <column name="email" type="VARCHAR(127)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jelszo" type="VARCHAR(64)"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+            <column defaultValueNumeric="1" name="aktiv" type="BIT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-44">
+        <createTable tableName="szemely_fokozatai">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fokozat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tudomanyterulet_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dolgozat_cime" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datum" type="date"/>
+            <column name="intezmeny" type="VARCHAR(256)"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-45">
+        <createTable tableName="szemely_has_szerepkor">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szerepkor_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-46">
+        <createTable tableName="szemely_supervise_fokozat">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fokozat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sorrend" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kezdo_datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_datum" type="date"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-47">
+        <createTable tableName="szemely_supervise_tdkdolgozat">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tdkdolgozat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-48">
+        <createTable tableName="szemely_szakjai">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szak_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kezdo_datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_datum" type="date"/>
+            <column name="megjegyzes" type="VARCHAR(256)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-49">
+        <createTable tableName="szerepkor">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-50">
+        <createTable tableName="szervezet">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="orszag_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szerepkor_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="leiras" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-51">
+        <createTable tableName="szervezet_szerepkor">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-52">
+        <createTable tableName="szervezet_tagjai">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szervezet_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kezdo_datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_datum" type="date"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-53">
+        <createTable tableName="tanszek">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-54">
+        <createTable tableName="tanszek_dolgozoi">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tanszek_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kezdo_datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_datum" type="date"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-55">
+        <createTable tableName="tanulmanyut">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tipus_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orszag_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kezdo_datum" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vege_datum" type="date"/>
+            <column name="intezmeny" type="VARCHAR(256)"/>
+            <column name="leiras" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-56">
+        <createTable tableName="tanulmanyut_has_szemely">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tanulmanyut_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-57">
+        <createTable tableName="tanulmanyut_tipus">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-58">
+        <createTable tableName="tdkdolgozat">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cim" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kari_tdk_szekcio_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kari_esemeny_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kari_pontszam" type="BIGINT(19) UNSIGNED"/>
+            <column name="kari_eredmeny" type="VARCHAR(256)"/>
+            <column name="kari_otdk_javasolt" type="BIT"/>
+            <column name="otdk_szekcio_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="otdk_tagozat_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="otdk_esemeny_id" type="BIGINT(19) UNSIGNED"/>
+            <column name="otdk_eredmeny" type="VARCHAR(256)"/>
+            <column name="resume" type="VARCHAR(1024)"/>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-59">
+        <createTable tableName="tdkdolgozat_biralok">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="szemely_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tdkdolgozat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-60">
+        <createTable tableName="tdkdolgozat_szekcio">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-61">
+        <createTable tableName="tdkdolgozat_szerzoi">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tdkdolgozat_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="szemely_has_szak_id" type="BIGINT(19) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sorrend" type="BIGINT(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="aktiv_felevek" type="BIGINT(19) UNSIGNED"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-62">
+        <createTable tableName="tdkdolgozat_tagozat">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="megjegyzes" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-63">
+        <createTable tableName="tudomanyterulet">
+            <column autoIncrement="true" name="id" type="BIGINT(19) UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nev" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-64">
+        <addForeignKeyConstraint baseColumnNames="tipus_id" baseTableName="alkotas" constraintName="FK_alkotas_alkotas_tipus" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="alkotas_tipus"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-65">
+        <addForeignKeyConstraint baseColumnNames="alkotas_id" baseTableName="alkotas_has_szemely" constraintName="FK_alkotas_has_szemely_alkotas" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="alkotas"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-66">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="alkotas_has_szemely" constraintName="FK_alkotas_has_szemely_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-67">
+        <addForeignKeyConstraint baseColumnNames="tipus_id" baseTableName="beruhazas" constraintName="FK_beruhazas_beruhazas_tipus" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="beruhazas_tipus"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-68">
+        <addForeignKeyConstraint baseColumnNames="bevetel_id" baseTableName="beruhazas" constraintName="FK_beruhazas_bevetel" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="bevetel"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-69">
+        <addForeignKeyConstraint baseColumnNames="tipus_id" baseTableName="bevetel" constraintName="FK_bevetel_bevetel_tipus" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="bevetel_tipus"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-70">
+        <addForeignKeyConstraint baseColumnNames="intezet_id" baseTableName="bevetel" constraintName="FK_bevetel_intezet" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="intezet"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-71">
+        <addForeignKeyConstraint baseColumnNames="palyazat_id" baseTableName="bevetel" constraintName="FK_bevetel_palyazat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-72">
+        <addForeignKeyConstraint baseColumnNames="tanszek_id" baseTableName="bevetel" constraintName="FK_bevetel_tanszek" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tanszek"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-73">
+        <addForeignKeyConstraint baseColumnNames="orszag_id" baseTableName="dij" constraintName="FK_dij_hazai_nemzetkozi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orszag"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-74">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="dij" constraintName="FK_dij_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-75">
+        <addForeignKeyConstraint baseColumnNames="tipus_id" baseTableName="esemeny" constraintName="FK_esemeny_esemeny_tipus" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="esemeny_tipus"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-76">
+        <addForeignKeyConstraint baseColumnNames="esemeny_id" baseTableName="esemeny_resztvevok" constraintName="FK_esemeny_has_szemely_esemeny" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="esemeny"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-77">
+        <addForeignKeyConstraint baseColumnNames="szerepkor_id" baseTableName="esemeny_resztvevok" constraintName="FK_esemeny_has_szemely_esemeny_szerepkor" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="esemeny_szerepkor"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-78">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="esemeny_resztvevok" constraintName="FK_esemeny_has_szemely_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-79">
+        <addForeignKeyConstraint baseColumnNames="fokozat_id" baseTableName="szemely_fokozatai" constraintName="FK_fokozat_fokozat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="fokozat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-80">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="szemely_fokozatai" constraintName="FK_fokozat_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-81">
+        <addForeignKeyConstraint baseColumnNames="tudomanyterulet_id" baseTableName="szemely_fokozatai" constraintName="FK_fokozat_tudomanyterulet" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tudomanyterulet"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-82">
+        <addForeignKeyConstraint baseColumnNames="intezet_id" baseTableName="intezet_tanszekei" constraintName="FK_intezet_has_tanszek_intezet" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="intezet"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-83">
+        <addForeignKeyConstraint baseColumnNames="tanszek_id" baseTableName="intezet_tanszekei" constraintName="FK_intezet_has_tanszek_tanszek" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tanszek"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-84">
+        <addForeignKeyConstraint baseColumnNames="orszag_id" baseTableName="intezmeny" constraintName="FK_intezmeny_orszag" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orszag"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-85">
+        <addForeignKeyConstraint baseColumnNames="nyelv_id" baseTableName="nyelvtudas" constraintName="FK_nyelvtudas_nyelv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="nyelv"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-86">
+        <addForeignKeyConstraint baseColumnNames="nyelvtudas_fok_id" baseTableName="nyelvtudas" constraintName="FK_nyelvtudas_nyelvtudas_fok" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="nyelvtudas_fok"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-87">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="nyelvtudas" constraintName="FK_nyelvtudas_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-88">
+        <addForeignKeyConstraint baseColumnNames="alkotas_id" baseTableName="palyazat_has_alkotas" constraintName="FK_palyazat_has_alkotas_alkotas" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="alkotas"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-89">
+        <addForeignKeyConstraint baseColumnNames="palyazat_id" baseTableName="palyazat_has_alkotas" constraintName="FK_palyazat_has_alkotas_palyazat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-90">
+        <addForeignKeyConstraint baseColumnNames="esemeny_id" baseTableName="palyazat_has_esemeny" constraintName="FK_palyazat_has_esemeny_esemeny" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="esemeny"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-91">
+        <addForeignKeyConstraint baseColumnNames="palyazat_id" baseTableName="palyazat_has_esemeny" constraintName="FK_palyazat_has_esemeny_palyazat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-92">
+        <addForeignKeyConstraint baseColumnNames="intezmeny_id" baseTableName="intezmeny_palyazatai" constraintName="FK_palyazat_has_intezmeny_intezmeny" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="intezmeny"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-93">
+        <addForeignKeyConstraint baseColumnNames="palyazat_id" baseTableName="intezmeny_palyazatai" constraintName="FK_palyazat_has_intezmeny_palyazat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-94">
+        <addForeignKeyConstraint baseColumnNames="palyazat_id" baseTableName="palyazat_has_publikacio" constraintName="FK_palyazat_has_publikacio_palyazat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-95">
+        <addForeignKeyConstraint baseColumnNames="publikacio_id" baseTableName="palyazat_has_publikacio" constraintName="FK_palyazat_has_publikacio_publikacio" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="publikacio"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-96">
+        <addForeignKeyConstraint baseColumnNames="palyazat_id" baseTableName="palyazok" constraintName="FK_palyazat_has_szemely_palyazat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-97">
+        <addForeignKeyConstraint baseColumnNames="szerepkor_id" baseTableName="palyazok" constraintName="FK_palyazat_has_szemely_palyazat_szerepkor" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat_szerepkor"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-98">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="palyazok" constraintName="FK_palyazat_has_szemely_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-99">
+        <addForeignKeyConstraint baseColumnNames="palyazat_id" baseTableName="palyazat_has_tudomanyterulet" constraintName="FK_palyazat_has_tudomanyterulet_palyazat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-100">
+        <addForeignKeyConstraint baseColumnNames="tudomanyterulet_id" baseTableName="palyazat_has_tudomanyterulet" constraintName="FK_palyazat_has_tudomanyterulet_tudomanyterulet" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tudomanyterulet"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-101">
+        <addForeignKeyConstraint baseColumnNames="orszag_id" baseTableName="palyazat" constraintName="FK_palyazat_hazai_nemzetkozi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orszag"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-102">
+        <addForeignKeyConstraint baseColumnNames="statusz_id" baseTableName="palyazat" constraintName="FK_palyazat_palyazat_statusz" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat_statusz"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-103">
+        <addForeignKeyConstraint baseColumnNames="tipus_id" baseTableName="palyazat" constraintName="FK_palyazat_palyazat_tipus" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="palyazat_tipus"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-104">
+        <addForeignKeyConstraint baseColumnNames="publikacio_id" baseTableName="publikacio_szerzok" constraintName="FK_publikacio_has_szemely_publikacio" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="publikacio"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-105">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="publikacio_szerzok" constraintName="FK_publikacio_has_szemely_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-106">
+        <addForeignKeyConstraint baseColumnNames="nyelv_id" baseTableName="publikacio" constraintName="FK_publikacio_nyelv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="nyelv"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-107">
+        <addForeignKeyConstraint baseColumnNames="tipus_id" baseTableName="publikacio" constraintName="FK_publikacio_publikacio_tipus" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="publikacio_tipus"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-108">
+        <addForeignKeyConstraint baseColumnNames="kepzesszint_id" baseTableName="szak" constraintName="FK_szak_kepzesszint" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="kepzesszint"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-109">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="tdkdolgozat_biralok" constraintName="FK_szemely_biral_tdkdolgozat_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-110">
+        <addForeignKeyConstraint baseColumnNames="tdkdolgozat_id" baseTableName="tdkdolgozat_biralok" constraintName="FK_szemely_biral_tdkdolgozat_tdkdolgozat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tdkdolgozat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-111">
+        <addForeignKeyConstraint baseColumnNames="intezmeny_id" baseTableName="intezmeny_dolgozoi" constraintName="FK_szemely_has_intezmeny_intezmeny" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="intezmeny"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-112">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="intezmeny_dolgozoi" constraintName="FK_szemely_has_intezmeny_szemely" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-113">
+        <addForeignKeyConstraint baseColumnNames="szak_id" baseTableName="szemely_szakjai" constraintName="FK_szemely_has_szak_szak" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szak"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-114">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="szemely_szakjai" constraintName="FK_szemely_has_szak_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-115">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="szervezet_tagjai" constraintName="FK_szemely_has_szervezet_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-116">
+        <addForeignKeyConstraint baseColumnNames="szervezet_id" baseTableName="szervezet_tagjai" constraintName="FK_szemely_has_szervezet_szervezet" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szervezet"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-117">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="tanszek_dolgozoi" constraintName="FK_szemely_has_tanszek_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-118">
+        <addForeignKeyConstraint baseColumnNames="tanszek_id" baseTableName="tanszek_dolgozoi" constraintName="FK_szemely_has_tanszek_tanszek" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tanszek"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-119">
+        <addForeignKeyConstraint baseColumnNames="fokozat_id" baseTableName="szemely_supervise_fokozat" constraintName="FK_szemely_supervise_fokozat_fokozat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely_fokozatai"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-120">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="szemely_supervise_fokozat" constraintName="FK_szemely_supervise_fokozat_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-121">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="szemely_supervise_tdkdolgozat" constraintName="FK_szemely_supervise_tdkdolgozat_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-122">
+        <addForeignKeyConstraint baseColumnNames="tdkdolgozat_id" baseTableName="szemely_supervise_tdkdolgozat" constraintName="FK_szemely_supervise_tdkdolgozat_tdkdolgozat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tdkdolgozat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-123">
+        <addForeignKeyConstraint baseColumnNames="orszag_id" baseTableName="szervezet" constraintName="FK_szervezet_hazai_nemzetkozi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orszag"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-124">
+        <addForeignKeyConstraint baseColumnNames="szerepkor_id" baseTableName="szervezet" constraintName="FK_szervezet_szervezet_szerepkor" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szervezet_szerepkor"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-125">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="tanulmanyut_has_szemely" constraintName="FK_tanulmanyut_has_szemely_szemely" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-126">
+        <addForeignKeyConstraint baseColumnNames="tanulmanyut_id" baseTableName="tanulmanyut_has_szemely" constraintName="FK_tanulmanyut_has_szemely_tanulmanyut" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tanulmanyut"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-127">
+        <addForeignKeyConstraint baseColumnNames="orszag_id" baseTableName="tanulmanyut" constraintName="FK_tanulmanyut_orszag" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orszag"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-128">
+        <addForeignKeyConstraint baseColumnNames="tipus_id" baseTableName="tanulmanyut" constraintName="FK_tanulmanyut_tanulmanyut" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tanulmanyut_tipus"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-129">
+        <addForeignKeyConstraint baseColumnNames="kari_esemeny_id" baseTableName="tdkdolgozat" constraintName="FK_tdkdolgozat_esemeny" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="esemeny"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-130">
+        <addForeignKeyConstraint baseColumnNames="otdk_esemeny_id" baseTableName="tdkdolgozat" constraintName="FK_tdkdolgozat_esemeny_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="esemeny"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-131">
+        <addForeignKeyConstraint baseColumnNames="szemely_has_szak_id" baseTableName="tdkdolgozat_szerzoi" constraintName="FK_tdkdolgozat_has_szerzo_szemely_has_szak" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely_szakjai"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-132">
+        <addForeignKeyConstraint baseColumnNames="tdkdolgozat_id" baseTableName="tdkdolgozat_szerzoi" constraintName="FK_tdkdolgozat_has_szerzo_tdkdolgozat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tdkdolgozat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-133">
+        <addForeignKeyConstraint baseColumnNames="kari_tdk_szekcio_id" baseTableName="tdkdolgozat" constraintName="FK_tdkdolgozat_tdkdolgozat_szekcio" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tdkdolgozat_szekcio"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-134">
+        <addForeignKeyConstraint baseColumnNames="otdk_szekcio_id" baseTableName="tdkdolgozat" constraintName="FK_tdkdolgozat_tdkdolgozat_szekcio_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tdkdolgozat_szekcio"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-135">
+        <addForeignKeyConstraint baseColumnNames="otdk_tagozat_id" baseTableName="tdkdolgozat" constraintName="FK_tdkdolgozat_tdkdolgozat_tagozat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tdkdolgozat_tagozat"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-136">
+        <addForeignKeyConstraint baseColumnNames="szerepkor_id" baseTableName="szemely_has_szerepkor" constraintName="assigned_roles_role_id_foreign" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szerepkor"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-137">
+        <addForeignKeyConstraint baseColumnNames="szemely_id" baseTableName="szemely_has_szerepkor" constraintName="assigned_roles_szemely_id_foreign" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-138">
+        <addForeignKeyConstraint baseColumnNames="parent_object" baseTableName="acl_object_identity" constraintName="foreign_fk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="acl_object_identity"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-139">
+        <addForeignKeyConstraint baseColumnNames="object_id_class" baseTableName="acl_object_identity" constraintName="foreign_fk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="acl_class"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-140">
+        <addForeignKeyConstraint baseColumnNames="owner_sid" baseTableName="acl_object_identity" constraintName="foreign_fk_3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="acl_sid"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-141">
+        <addForeignKeyConstraint baseColumnNames="acl_object_identity" baseTableName="acl_entry" constraintName="foreign_fk_4" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="acl_object_identity"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-142">
+        <addForeignKeyConstraint baseColumnNames="sid" baseTableName="acl_entry" constraintName="foreign_fk_5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="acl_sid"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-143">
+        <addUniqueConstraint columnNames="eha_kod" constraintName="eha_kod" deferrable="false" disabled="false" initiallyDeferred="false" tableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-144">
+        <addUniqueConstraint columnNames="email" constraintName="email" deferrable="false" disabled="false" initiallyDeferred="false" tableName="szemely"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-145">
+        <addUniqueConstraint columnNames="nev" constraintName="nev" deferrable="false" disabled="false" initiallyDeferred="false" tableName="szak"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-146">
+        <addUniqueConstraint columnNames="nev" constraintName="roles_name_unique" deferrable="false" disabled="false" initiallyDeferred="false" tableName="szerepkor"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-147">
+        <addUniqueConstraint columnNames="sid, principal" constraintName="unique_uk_1" deferrable="false" disabled="false" initiallyDeferred="false" tableName="acl_sid"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-148">
+        <addUniqueConstraint columnNames="class" constraintName="unique_uk_2" deferrable="false" disabled="false" initiallyDeferred="false" tableName="acl_class"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-149">
+        <addUniqueConstraint columnNames="object_id_class, object_id_identity" constraintName="unique_uk_3" deferrable="false" disabled="false" initiallyDeferred="false" tableName="acl_object_identity"/>
+    </changeSet>
+    <changeSet author="noherczeg (generated)" id="1394402495581-150">
+        <addUniqueConstraint columnNames="acl_object_identity, ace_order" constraintName="unique_uk_4" deferrable="false" disabled="false" initiallyDeferred="false" tableName="acl_entry"/>
+    </changeSet>
+</databaseChangeLog>

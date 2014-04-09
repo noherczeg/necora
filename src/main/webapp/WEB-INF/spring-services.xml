@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="userService" class="hu.noherczeg.necora.domain.user.UserServiceImpl" >
+        <constructor-arg ref="userRepository"/>
+    </bean>
+    <bean id="menuService" class="hu.noherczeg.necora.domain.menu.MenuServiceImpl" >
+        <constructor-arg name="menuRepository" ref="menuRepository"/>
+        <constructor-arg name="userDetailsService" ref="userDetailsService"/>
+        <constructor-arg name="aclHelpService" ref="aclHelpService"/>
+    </bean>
+
+</beans>

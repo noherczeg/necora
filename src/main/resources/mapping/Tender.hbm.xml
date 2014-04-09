@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.tender.Tender" table="palyazat" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="title" column="cime" access="field"/>
+        <property name="construction" column="konstrukcio" access="field"/>
+        <property name="leading" column="vezeto" access="field"/>
+        <property name="amountRequested" column="osszeg_igenyelt" access="field"/>
+        <property name="amountOfOwnFunds" column="osszeg_onero" access="field"/>
+        <property name="submissionDate" column="beadasi_datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="start" column="kezdo_datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="end" column="vege_datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="description" column="leiras" access="field"/>
+        <many-to-one name="country" class="hu.noherczeg.necora.domain.country.Country" access="field">
+            <column name="orszag_id"/>
+        </many-to-one>
+        <many-to-one name="status" class="hu.noherczeg.necora.domain.tender.TenderStatus" access="field">
+            <column name="statusz_id"/>
+        </many-to-one>
+        <many-to-one name="type" class="hu.noherczeg.necora.domain.tender.TenderType" access="field">
+            <column name="tipus_id"/>
+        </many-to-one>
+        <set name="incomes" inverse="true" access="field">
+            <key>
+                <column name="palyazat_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.income.Income"/>
+        </set>
+        <set name="institutions" inverse="true" access="field">
+            <key>
+                <column name="palyazat_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.institution.TenderOfInstitution"/>
+        </set>
+        <set name="works" inverse="true" access="field" table="palyazat_has_alkotas">
+            <key>
+                <column name="palyazat_id" not-null="true"/>
+            </key>
+            <many-to-many not-found="ignore" class="hu.noherczeg.necora.domain.work.Work"/>
+        </set>
+        <set name="events" inverse="true" table="palyazat_has_esemeny" access="field">
+            <key>
+                <column name="palyazat_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.event.Event"/>
+        </set>
+        <set name="publications" inverse="true" table="palyazat_has_publikacio" access="field">
+            <key>
+                <column name="palyazat_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.publication.Publication"/>
+        </set>
+        <set name="fieldOfSciences" inverse="true" table="palyazat_has_tudomanyterulet" access="field">
+            <key>
+                <column name="palyazat_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.field.FieldOfScience"/>
+        </set>
+        <set name="applicants" inverse="true" table="palyazat_szerepkor" access="field">
+            <key>
+                <column name="id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.tender.RoleInTender"/>
+        </set>
+    </class>
+</hibernate-mapping>

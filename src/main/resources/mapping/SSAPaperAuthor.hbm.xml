@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="hu.noherczeg.necora.domain.ssa.SSAPaperAuthor" table="tdkdolgozat_szerzoi" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="order" column="sorrend" access="field"/>
+        <property name="activeSemesters" column="aktiv_felevek" access="field"/>
+        <many-to-one name="specializationOfPerson" class="hu.noherczeg.necora.domain.specialization.SpecializationOfPerson" access="field">
+            <column name="szemely_has_szak_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="ssaPaper" class="hu.noherczeg.necora.domain.ssa.SSAPaper" access="field">
+            <column name="tdkdolgozat_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

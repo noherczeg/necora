@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.publication.Publication" table="publikacio" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="title" column="cim" access="field"/>
+        <property name="date" column="datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="proofread" column="lektoralt" access="field"/>
+        <property name="placeOfPublication" column="megjelenes_hely" access="field"/>
+        <property name="publisher" column="megjelenes_kiado" access="field"/>
+        <property name="numberOfPages" column="oldalszam" access="field"/>
+        <property name="volume" column="kotet" access="field"/>
+        <property name="impactFactor" column="impaktfaktor" access="field"/>
+        <property name="independentOnReference" column="hivatkozas_fuggetlen" access="field"/>
+        <property name="dependentOnReference" column="hivatkozas_fuggo" access="field"/>
+        <property name="mtmtId" column="mtmt_id" access="field"/>
+        <property name="comment" column="megjegyzes" access="field"/>
+        <many-to-one name="language" class="hu.noherczeg.necora.domain.language.Language" access="field">
+            <column name="nyelv_id"/>
+        </many-to-one>
+        <many-to-one name="type" class="hu.noherczeg.necora.domain.publication.PublicationType" access="field">
+            <column name="tipus_id" not-null="true"/>
+        </many-to-one>
+        <set name="tenders" inverse="true" table="palyazat_has_publikacio" access="field">
+            <key>
+                <column name="publikacio_id" not-null="true"/>
+            </key>
+            <many-to-many not-found="ignore" class="hu.noherczeg.necora.domain.tender.Tender"/>
+        </set>
+        <set name="authors" inverse="true" access="field">
+            <key>
+                <column name="publikacio_id" not-null="true"/>
+            </key>
+            <many-to-many not-found="ignore" class="hu.noherczeg.necora.domain.publication.Author"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.institution.EmployeeOfInstitution" table="intezmeny_dolgozoi" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="start" column="kezdo_datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="end" column="vege_datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="comment" column="megjegyzes" access="field"/>
+        <many-to-one name="institution" class="hu.noherczeg.necora.domain.institution.Institution" access="field">
+            <column name="intezmeny_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="user" class="hu.noherczeg.necora.domain.user.User" access="field">
+            <column name="szemely_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

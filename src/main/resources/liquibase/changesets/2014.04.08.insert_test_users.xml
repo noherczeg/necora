@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="noherczeg" id="1396958866-1">
+        <insert tableName="szemely">
+            <column name="csaladnev" value="Teszt" />
+            <column name="keresztnev" value="Géza" />
+            <column name="eha_kod" value="ABCDEFG.PTE" />
+            <column name="email" value="user1" />
+            <column name="jelszo" value="$2a$04$ber9NnL.QQa64oj7uxCbm.n2C3OnP34a.zP2G31LLyYIMBZ2QmlTq" /> <!-- user1 -->
+        </insert>
+        <insert tableName="szemely">
+            <column name="csaladnev" value="Teszt" />
+            <column name="keresztnev" value="Géza" />
+            <column name="eha_kod" value="HENSAAP.PTE" />
+            <column name="email" value="user2" />
+            <column name="jelszo" value="$2a$04$teJnDAhH3imWLrcd1cw5y.Qkp1vT50xJMZCrPDKxztjLLKkitDdx." /> <!-- user2 -->
+        </insert>
+        <insert tableName="szemely">
+            <column name="csaladnev" value="Teszt" />
+            <column name="keresztnev" value="Géza" />
+            <column name="eha_kod" value="GFEDCBA.PTE" />
+            <column name="email" value="admin" />
+            <column name="jelszo" value="$2a$04$bgWqpaR5gKgZG1U6SNn74OMXFB8KpaBYovsxIwMzVlt/nFaSdtLe." /> <!-- admin -->
+        </insert>
+    </changeSet>
+</databaseChangeLog>

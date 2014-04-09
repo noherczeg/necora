@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.institution.TenderOfInstitution" table="intezmeny_palyazatai" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="responsible" column="felelos" access="field"/>
+        <property name="comment" column="megjegyzes" access="field"/>
+        <many-to-one name="institution" class="hu.noherczeg.necora.domain.institution.Institution" access="field">
+            <column name="intezmeny_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="tender" class="hu.noherczeg.necora.domain.tender.Tender" access="field">
+            <column name="palyazat_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

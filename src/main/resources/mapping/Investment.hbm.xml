@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="hu.noherczeg.necora.domain.investment.Investment" table="beruhazas" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="amount" column="osszeg" access="field"/>
+        <property name="date" column="datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="description" column="leiras" access="field"/>
+        <many-to-one name="type" class="hu.noherczeg.necora.domain.investment.InvestmentType" access="field">
+            <column name="tipus_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="income" class="hu.noherczeg.necora.domain.income.Income" access="field">
+            <column name="bevetel_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

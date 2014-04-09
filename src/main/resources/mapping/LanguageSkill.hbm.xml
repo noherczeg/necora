@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.language.LanguageSkill" table="nyelvtudas" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="certificate" column="bizonyitvany" access="field"/>
+        <property name="date" column="datum" type="org.jadira.usertype.dateandtime.joda.PersistentDateTime" access="field"/>
+        <property name="comment" column="megjegyzes" access="field"/>
+        <many-to-one name="language" class="hu.noherczeg.necora.domain.language.Language" access="field">
+            <column name="nyelv_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="degreeOfLanguageSkill" class="hu.noherczeg.necora.domain.language.DegreeOfLanguageSkill" access="field">
+            <column name="nyelvtudas_fok_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="person" class="hu.noherczeg.necora.domain.user.User" access="field">
+            <column name="szemely_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

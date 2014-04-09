@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hu.noherczeg.necora.domain.user.User" table="szemely" schema="">
+        <id name="id" column="id" access="field"/>
+        <property name="title" column="titulus" access="field"/>
+        <property name="lastName" column="csaladnev" access="field"/>
+        <property name="firstName" column="keresztnev" access="field"/>
+        <property name="ehaCode" column="eha_kod" access="field"/>
+        <property name="omId" column="om_id" access="field"/>
+        <property name="email" column="email" access="field"/>
+        <property name="password" column="jelszo" access="field"/>
+        <property name="comment" column="megjegyzes" access="field"/>
+        <property name="enabled" column="aktiv" type="org.hibernate.type.NumericBooleanType" access="field"/>
+        <set name="works" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.work.ParticipantInWork"/>
+        </set>
+        <set name="awards" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.award.Award"/>
+        </set>
+        <set name="participantInEvents" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.event.Participant"/>
+        </set>
+        <set name="employedByInstitutions" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.institution.EmployeeOfInstitution"/>
+        </set>
+        <set name="languageSkills" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.language.LanguageSkill"/>
+        </set>
+        <set name="applicantInTenders" inverse="true" table="palyazok" lazy="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.tender.Applicant"/>
+        </set>
+        <set name="authorOfPublications" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.publication.Author"/>
+        </set>
+        <set name="degrees" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.user.PersonsDegree"/>
+        </set>
+        <set name="authorities" table="szemely_has_szerepkor" inverse="false" lazy="true" fetch="join" cascade="all" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="hu.noherczeg.necora.security.authority.Authority">
+                <column name="szerepkor_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="supervisesDegrees" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.user.PersonSupervisesDegree"/>
+        </set>
+        <set name="superviseSSAPapers" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.user.PersonSupervisesSSAPaper"/>
+        </set>
+        <set name="specializations" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.specialization.SpecializationOfPerson"/>
+        </set>
+        <set name="memberOfOrganizations" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.organization.MemberOfOrganization"/>
+        </set>
+        <set name="employedByDepartments" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.department.EmployeeOfDepartment"/>
+        </set>
+        <set name="fieldTrips" inverse="true" table="tanulmanyut_has_szemely" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.fieldtrip.FieldTrip"/>
+        </set>
+        <set name="judgesSSAPapers" inverse="true" access="field">
+            <key>
+                <column name="szemely_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.ssa.SSAPaperJudge"/>
+        </set>
+    </class>
+</hibernate-mapping>
