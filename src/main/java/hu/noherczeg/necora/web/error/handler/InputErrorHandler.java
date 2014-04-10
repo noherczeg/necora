@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 class InputErrorHandler {
 
-	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-	@ResponseBody
+    @ResponseBody
     public DetailedMessageDTO processUnsupportedMediaTypeError(HttpMediaTypeNotSupportedException ex) {
         return new DetailedMessageDTO(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value(), "Not Supported", null, "The given MediaType is not supported on the requested Resource!");
     }
-	
-	@ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
-    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-	@ResponseBody
+
+    @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ResponseBody
     public DetailedMessageDTO processNotAcceptableError(HttpMediaTypeNotAcceptableException ex) {
         return new DetailedMessageDTO(HttpStatus.NOT_ACCEPTABLE.value(), "Not Acceptable", null, "The Server couldn't serve any Content-Type that the Client would accept!");
     }
-	
+
 }

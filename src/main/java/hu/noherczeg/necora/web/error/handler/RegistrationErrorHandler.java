@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class RegistrationErrorHandler {
 
-	@ExceptionHandler(UserAlreadyExistsException.class)
+    @ExceptionHandler(UserAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-	@ResponseBody
+    @ResponseBody
     public DetailedMessageDTO processUserExistsError(UserAlreadyExistsException ex) {
         return new DetailedMessageDTO(HttpStatus.CONFLICT.value(), "User already exists", null, "Couldn't register User because one with the same credentials already exists");
     }
-	
+
 }

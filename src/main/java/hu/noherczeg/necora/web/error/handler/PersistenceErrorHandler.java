@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 class PersistenceErrorHandler {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(PersistenceErrorHandler.class);
-	
-	@ExceptionHandler(EntityDeletionException.class)
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersistenceErrorHandler.class);
+
+    @ExceptionHandler(EntityDeletionException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	@ResponseBody
+    @ResponseBody
     public DetailedMessageDTO processEntityDeletionException(EntityDeletionException ex) {
         LOGGER.error(ex.getMessage(), ex);
         return new DetailedMessageDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Entity deletion error", null, "Couldn't delete the selected Entity!");
     }
-	
+
 }

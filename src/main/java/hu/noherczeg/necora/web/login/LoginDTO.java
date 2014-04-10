@@ -7,11 +7,11 @@ import javax.validation.constraints.NotNull;
 
 class LoginDTO {
 
-	@NotNull(message = "Email address must be provided")
-	private String email;
-	
-	@Length(min = 3, message = "password should be at least 3 characters long")
-	private String password;
+    @NotNull(message = "Email address must be provided")
+    private String email;
+
+    @Length(min = 3, message = "password should be at least 3 characters long")
+    private String password;
 
     LoginDTO() {
     }
@@ -22,11 +22,11 @@ class LoginDTO {
     }
 
     public String getEmail() {
-		return email;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
 }

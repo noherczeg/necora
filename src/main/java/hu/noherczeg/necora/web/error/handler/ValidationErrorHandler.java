@@ -19,7 +19,7 @@ import java.util.Locale;
 @ControllerAdvice
 class ValidationErrorHandler {
 
-	private MessageSource messageSource;
+    private MessageSource messageSource;
 
     @Autowired
     public ValidationErrorHandler(MessageSource messageSource) {
@@ -39,9 +39,9 @@ class ValidationErrorHandler {
     private ValidationErrorDTO processFieldErrors(List<FieldError> fieldErrors) {
         ValidationErrorDTO dto = new ValidationErrorDTO();
 
-        for (FieldError fieldError: fieldErrors) {
+        for (FieldError fieldError : fieldErrors) {
             @SuppressWarnings("unused")
-			String localizedErrorMessage = resolveLocalizedErrorMessage(fieldError);
+            String localizedErrorMessage = resolveLocalizedErrorMessage(fieldError);
             dto.addFieldError(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
@@ -49,7 +49,7 @@ class ValidationErrorHandler {
     }
 
     private String resolveLocalizedErrorMessage(FieldError fieldError) {
-        Locale currentLocale =  LocaleContextHolder.getLocale();
+        Locale currentLocale = LocaleContextHolder.getLocale();
         String localizedErrorMessage = messageSource.getMessage(fieldError, currentLocale);
 
         //If the message was not found, return the most accurate field error code instead.
@@ -61,5 +61,5 @@ class ValidationErrorHandler {
 
         return localizedErrorMessage;
     }
-	
+
 }

@@ -2,7 +2,7 @@ package hu.noherczeg.necora.web.error.dto;
 
 class FieldErrorDTO {
 
-	private String field;
+    private String field;
 
     private String message;
 
@@ -11,12 +11,12 @@ class FieldErrorDTO {
         this.message = message;
     }
 
-	public String getField() {
-		return field;
-	}
+    public String getField() {
+        return field;
+    }
 
-	public String getMessage() {
-		return message;
-	}
-	
+    public String getMessage() {
+        return message;
+    }
+
 }

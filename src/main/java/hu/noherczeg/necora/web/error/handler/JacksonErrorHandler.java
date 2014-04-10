@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class JacksonErrorHandler {
 
-	@ExceptionHandler(JsonProcessingException.class)
+    @ExceptionHandler(JsonProcessingException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	@ResponseBody
+    @ResponseBody
     public DetailedMessageDTO processUserExistsError(JsonProcessingException ex) {
         return new DetailedMessageDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Data serialization error", null, "Couldn't serialize original Data!");
     }
-	
+
 }

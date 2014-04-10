@@ -18,9 +18,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-	
-	private UserService userService;
-	private MenuService menuService;
+
+    private UserService userService;
+    private MenuService menuService;
     private BasicUserResourceAssembler userResourceAssembler;
 
     @Autowired
@@ -32,15 +32,15 @@ public class UserController {
 
     @RequestMapping(value = "/listMenus", method = RequestMethod.GET)
     @ResponseBody
-	public Collection<Menu> getMenusForUser() {
-		return menuService.listMenu();
-	}
-	
-	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<Menu> getMenusForUser() {
+        return menuService.listMenu();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public List<User> listUsers() {
-		return userService.listUsers();
-	}
+    public List<User> listUsers() {
+        return userService.listUsers();
+    }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

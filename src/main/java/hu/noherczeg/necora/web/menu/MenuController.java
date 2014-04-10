@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package hu.noherczeg.necora.web.menu;
 
@@ -18,23 +18,23 @@ import java.util.Collection;
 @Controller
 @RequestMapping("menus")
 class MenuController {
-	
+
     private MenuService menuService;
 
     @Autowired
     public MenuController(MenuService menuService) {
         this.menuService = menuService;
     }
-	
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody 
-	public Collection<Menu> getMenus() {
-		return menuService.listMenu();
-	}
-	
-	@RequestMapping(value = "new", method = RequestMethod.GET)
-	@ResponseBody 
-	public Menu create(Principal principal, @RequestParam(value = "name", required = true) final String name) {
-		return menuService.create(name, principal);
-	}
+
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public Collection<Menu> getMenus() {
+        return menuService.listMenu();
+    }
+
+    @RequestMapping(value = "new", method = RequestMethod.GET)
+    @ResponseBody
+    public Menu create(Principal principal, @RequestParam(value = "name", required = true) final String name) {
+        return menuService.create(name, principal);
+    }
 }
