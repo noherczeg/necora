@@ -1,57 +1,54 @@
-package hu.noherczeg.necora.domain.user;
+package hu.noherczeg.necora.web.user.resources.full;
 
 import hu.noherczeg.necora.domain.award.Award;
 import hu.noherczeg.necora.domain.department.EmployeeOfDepartment;
 import hu.noherczeg.necora.domain.event.Participant;
 import hu.noherczeg.necora.domain.fieldtrip.FieldTrip;
 import hu.noherczeg.necora.domain.institution.EmployeeOfInstitution;
-import hu.noherczeg.necora.domain.language.LanguageSkill;
 import hu.noherczeg.necora.domain.organization.MemberOfOrganization;
 import hu.noherczeg.necora.domain.publication.Author;
 import hu.noherczeg.necora.domain.specialization.SpecializationOfPerson;
 import hu.noherczeg.necora.domain.ssa.SSAPaperJudge;
 import hu.noherczeg.necora.domain.tender.Applicant;
+import hu.noherczeg.necora.domain.user.PersonSupervisesDegree;
+import hu.noherczeg.necora.domain.user.PersonSupervisesSSAPaper;
+import hu.noherczeg.necora.domain.user.PersonsDegree;
 import hu.noherczeg.necora.domain.work.ParticipantInWork;
-import hu.noherczeg.necora.security.authority.Authority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.hateoas.ResourceSupport;
 
-import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-public class User implements Serializable, UserDetails {
-	
-	private static final long serialVersionUID = 9212811318333029149L;
+public class UserFullResource extends ResourceSupport {
+
     private Long id;
-	private String email;
-	private String password;
-	private boolean enabled;
+    private String email;
+    private boolean enabled;
     private String title;
     private String lastName;
     private String firstName;
     private String ehaCode;
     private String omId;
     private String comment;
-	private Set<Authority> authorities;
     private Set<ParticipantInWork> works;
     private Set<Award> awards;
     private Set<Participant> participantInEvents;
     private Set<EmployeeOfInstitution> employedByInstitutions;
-    private Set<LanguageSkill> languageSkills;
+    private Set<LanguageSkillBasicForUser> languageSkills;
     private Set<Applicant> applicantInTenders;
     private Set<Author> authorOfPublications;
     private Set<PersonsDegree> degrees;
     private Set<PersonSupervisesDegree> supervisesDegrees;
-    private Set<PersonSupervisesSSAPaper> supervisesSSAPapers;
+    private Set<PersonSupervisesSSAPaper> superviseSSAPapers;
     private Set<SpecializationOfPerson> specializations;
     private Set<MemberOfOrganization> memberOfOrganizations;
     private Set<EmployeeOfDepartment> employedByDepartments;
     private Set<FieldTrip> fieldTrips;
     private Set<SSAPaperJudge> judgesSSAPapers;
-	
-	public User() {
-        this.authorities = new LinkedHashSet<>();
-        this.authorOfPublications = new LinkedHashSet<>();
+
+    public UserFullResource() {
         this.works = new LinkedHashSet<>();
+        this.authorOfPublications = new LinkedHashSet<>();
         this.awards = new LinkedHashSet<>();
         this.participantInEvents = new LinkedHashSet<>();
         this.employedByInstitutions = new LinkedHashSet<>();
@@ -59,7 +56,7 @@ public class User implements Serializable, UserDetails {
         this.applicantInTenders = new LinkedHashSet<>();
         this.degrees = new LinkedHashSet<>();
         this.supervisesDegrees = new LinkedHashSet<>();
-        this.supervisesSSAPapers = new LinkedHashSet<>();
+        this.superviseSSAPapers = new LinkedHashSet<>();
         this.specializations = new LinkedHashSet<>();
         this.memberOfOrganizations = new LinkedHashSet<>();
         this.employedByDepartments = new LinkedHashSet<>();
@@ -67,66 +64,34 @@ public class User implements Serializable, UserDetails {
         this.judgesSSAPapers = new LinkedHashSet<>();
     }
 
-    public User(String email, String firstName, String lastName) {
-        this.authorities = new LinkedHashSet<>();
-        this.authorOfPublications = new LinkedHashSet<>();
-        this.works = new LinkedHashSet<>();
-        this.awards = new LinkedHashSet<>();
-        this.participantInEvents = new LinkedHashSet<>();
-        this.employedByInstitutions = new LinkedHashSet<>();
-        this.languageSkills = new LinkedHashSet<>();
-        this.applicantInTenders = new LinkedHashSet<>();
-        this.degrees = new LinkedHashSet<>();
-        this.supervisesDegrees = new LinkedHashSet<>();
-        this.supervisesSSAPapers = new LinkedHashSet<>();
-        this.specializations = new LinkedHashSet<>();
-        this.memberOfOrganizations = new LinkedHashSet<>();
-        this.employedByDepartments = new LinkedHashSet<>();
-        this.fieldTrips = new LinkedHashSet<>();
-        this.judgesSSAPapers = new LinkedHashSet<>();
+    public UserFullResource(Long id, String email, String title, String lastName, String firstName, String ehaCode) {
+        this.id = id;
         this.email = email;
-        this.firstName = firstName;
+        this.title = title;
         this.lastName = lastName;
-    }
-
-    @Override
-	public String getUsername() {
-		return email;
-	}
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public Set<Authority> getAuthorities() {
-		return this.authorities;
-	}
-
-    public Long getId() {
-        return id;
+        this.firstName = firstName;
+        this.ehaCode = ehaCode;
+        this.works = new LinkedHashSet<>();
+        this.awards = new LinkedHashSet<>();
+        this.authorOfPublications = new LinkedHashSet<>();
+        this.participantInEvents = new LinkedHashSet<>();
+        this.employedByInstitutions = new LinkedHashSet<>();
+        this.languageSkills = new LinkedHashSet<>();
+        this.applicantInTenders = new LinkedHashSet<>();
+        this.degrees = new LinkedHashSet<>();
+        this.supervisesDegrees = new LinkedHashSet<>();
+        this.superviseSSAPapers = new LinkedHashSet<>();
+        this.specializations = new LinkedHashSet<>();
+        this.memberOfOrganizations = new LinkedHashSet<>();
+        this.employedByDepartments = new LinkedHashSet<>();
+        this.fieldTrips = new LinkedHashSet<>();
+        this.judgesSSAPapers = new LinkedHashSet<>();
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public boolean isEnabled() {
         return enabled;
     }
@@ -171,7 +136,7 @@ public class User implements Serializable, UserDetails {
         return employedByInstitutions;
     }
 
-    public Set<LanguageSkill> getLanguageSkills() {
+    public Set<LanguageSkillBasicForUser> getLanguageSkills() {
         return languageSkills;
     }
 
@@ -191,8 +156,8 @@ public class User implements Serializable, UserDetails {
         return supervisesDegrees;
     }
 
-    public Set<PersonSupervisesSSAPaper> getSupervisesSSAPapers() {
-        return supervisesSSAPapers;
+    public Set<PersonSupervisesSSAPaper> getSuperviseSSAPapers() {
+        return superviseSSAPapers;
     }
 
     public Set<SpecializationOfPerson> getSpecializations() {
@@ -215,28 +180,8 @@ public class User implements Serializable, UserDetails {
         return judgesSSAPapers;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setEhaCode(String ehaCode) {
-        this.ehaCode = ehaCode;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public void setOmId(String omId) {
@@ -245,13 +190,5 @@ public class User implements Serializable, UserDetails {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public void enable() {
-        this.enabled = true;
-    }
-
-    public void disable() {
-        this.enabled = false;
     }
 }

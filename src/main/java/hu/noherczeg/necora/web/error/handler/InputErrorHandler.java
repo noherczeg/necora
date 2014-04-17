@@ -1,6 +1,8 @@
 package hu.noherczeg.necora.web.error.handler;
 
 import hu.noherczeg.necora.web.DetailedMessageDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 class InputErrorHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(InputErrorHandler.class);
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)

@@ -38,7 +38,7 @@ class JpaHibernateRepository<T, ID extends Serializable> implements JpaRepositor
     @SuppressWarnings("unchecked")
     @Override
     public List<T> findAll() {
-        return (List<T>) getCurrentSession().createQuery("from " + getEntity().getSimpleName() + " order by key('id') DESC").list();
+        return (List<T>) getCurrentSession().createQuery("from " + entity.getSimpleName() + " order by 'id' DESC").list();
     }
 
     @Override

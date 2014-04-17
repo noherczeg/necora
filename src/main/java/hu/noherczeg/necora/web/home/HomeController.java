@@ -1,5 +1,7 @@
 package hu.noherczeg.necora.web.home;
 
+import hu.noherczeg.necora.security.authority.RoleConstants;
+import hu.noherczeg.necora.security.util.SecurityUtils;
 import hu.noherczeg.necora.web.user.UserController;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -17,8 +19,10 @@ public class HomeController {
     @ResponseBody
     public EntryPointsDTO entryPoints() {
         EntryPointsDTO epd = new EntryPointsDTO();
-        epd.add(linkTo(methodOn(UserController.class).listUsers()).withRel("users"));
-        epd.add(linkTo(methodOn(UserController.class).getMenusForUser()).withRel("menus"));
+        if (SecurityUtils.userHasAuthority(RoleConstants.ROLE_ADMIN))
+            epd.add(linkTo(methodOn(UserController.class).listUsers()).withRel("users"));
+        if (SecurityUtils.userHasAuthority("ROLE_FAKER"))
+            epd.add(linkTo(methodOn(UserController.class).listUsers()).withRel("fakery"));
         return epd;
     }
 }

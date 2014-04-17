@@ -3,12 +3,29 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
        ">
     <context:component-scan base-package="hu.noherczeg.necora.web" annotation-config="true"/>
+    <context:property-placeholder location="classpath:application.properties"/>
+
     <mvc:resources mapping="/assets/**" location="/assets/"/>
-    <mvc:annotation-driven/>
+
+    <!--Jackson - objectMapper -->
+    <bean id="objectMapper" class="hu.noherczeg.necora.web.mapper.CustomObjectMapper" >
+        <constructor-arg value="${server.timezone}"/>
+    </bean>
+
+    <!-- Spring MVC:  setting objectMapper in converter MappingJackson2HttpMessageConverter-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="objectMapper" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
 </beans>

@@ -15,7 +15,7 @@
         <spring.security.version>3.2.0.RELEASE</spring.security.version>
         <spring-hateoas.version>0.9.0.RELEASE</spring-hateoas.version>
 
-        <jackson.version>2.3.0</jackson.version>
+        <jackson.version>2.3.3</jackson.version>
         <joda-time.version>2.3</joda-time.version>
         <jadira.usertype.version>3.1.0.CR10</jadira.usertype.version>
 
@@ -141,7 +141,7 @@
             <version>${spring.security.version}</version>
         </dependency>
 
-        <!-- Eh cache -->
+        <!-- EhCache -->
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
@@ -159,6 +159,17 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate4</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
 
         <!-- REST -->
         <dependency>
@@ -185,11 +196,6 @@
         </dependency>
 
         <!-- Hibernate -->
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-dbcp</artifactId>
-            <version>${tomcat-dbcp.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -225,6 +231,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-dbcp</artifactId>
+            <version>${tomcat-dbcp.version}</version>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>

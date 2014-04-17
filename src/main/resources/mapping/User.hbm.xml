@@ -77,7 +77,7 @@
             </key>
             <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.user.PersonSupervisesDegree"/>
         </set>
-        <set name="superviseSSAPapers" inverse="true" access="field">
+        <set name="supervisesSSAPapers" inverse="true" access="field">
             <key>
                 <column name="szemely_id" not-null="true"/>
             </key>
@@ -105,7 +105,9 @@
             <key>
                 <column name="szemely_id" not-null="true"/>
             </key>
-            <one-to-many not-found="ignore" class="hu.noherczeg.necora.domain.fieldtrip.FieldTrip"/>
+            <many-to-many entity-name="hu.noherczeg.necora.domain.fieldtrip.FieldTrip">
+                <column name="tanulmanyut_id" not-null="true" />
+            </many-to-many>
         </set>
         <set name="judgesSSAPapers" inverse="true" access="field">
             <key>

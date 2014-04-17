@@ -3,6 +3,7 @@ package hu.noherczeg.necora.domain.user;
 import hu.noherczeg.necora.security.authority.Authority;
 import hu.noherczeg.necora.security.authority.RoleConstants;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +20,12 @@ class UserServiceImpl implements UserService {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional(readOnly = true)
+    //@Cacheable(value="users")
 	public List<User> listUsers() {
 		return userRepository.findAll();
 	}
-	
+
+    @Transactional(readOnly = false)
 	public void addUser(User newUser) {
 		User user = new User();
 		BeanUtils.copyProperties(newUser, user);
@@ -32,7 +35,8 @@ class UserServiceImpl implements UserService {
         }
 		userRepository.save(user);
 	}
-	
+
+    @Transactional(readOnly = false)
 	public void deleteUser(User userToDelete) {
 		User user = new User();
 		BeanUtils.copyProperties(userToDelete, user);
@@ -40,8 +44,10 @@ class UserServiceImpl implements UserService {
 	}
 
     @Override
+    @Transactional(readOnly = true)
     public User findById(Long id) {
-        return userRepository.findById(id);
+        User user = userRepository.findByIdWithAll(id);
+        return user;
     }
 
     private boolean isAuthorityPresent(User user, GrantedAuthority auth) {

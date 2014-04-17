@@ -73,4 +73,8 @@ public class LanguageSkill implements Serializable {
     public void setLanguage(Language language) {
         this.language = language;
     }
+
+    public void setDegreeOfLanguageSkill(DegreeOfLanguageSkill degreeOfLanguageSkill) {
+        this.degreeOfLanguageSkill = degreeOfLanguageSkill;
+    }
 }

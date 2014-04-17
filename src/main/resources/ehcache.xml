@@ -9,4 +9,8 @@
             diskExpiryThreadIntervalSeconds="120"
             memoryStoreEvictionPolicy="LRU"
             />
+    <cache name="users"
+           maxBytesLocalHeap="50m"
+           timeToLiveSeconds="100">
+    </cache>
 </ehcache>
